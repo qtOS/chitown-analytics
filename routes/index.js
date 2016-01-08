@@ -10,7 +10,7 @@ var crime = require('../models/crime')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index');
+  res.render('index', { user: req.user });
 });
 
 router.post('/api', function(request, response, next) {

@@ -1,14 +1,32 @@
-<form action="/account/savesearch" method="post">
-  <input type="hidden" name="primarycrime" value="">
-  <input type="hidden" name="subcrime" value="">
-  <input type="hidden" name="subcrime" value="">
-  <input type="hidden" name="subcrime" value="">
-  <input type="hidden" name="subcrime" value="">
-  <input type="submit" value="Save Filters">
+<form id="saveMapFilter" action="/account/savemap" method="post">
+  <input id="hiddenPrimaryCrime" type="hidden" name="primarycrime" value="">
+  <input id="hiddenSubcrime" type="hidden" name="subcrime" value="">
+  <input id="hiddenTimeStart" type="hidden" name="timeStart" value="">
+  <input id="hiddenTimeEnd" type="hidden" name="timeEnd" value="">
+  <input type="submit" value="Save Filter">
 </form>
 
-primarycrime: String,
-subcrime: String,
-timeStart: String,
-timeEnd: String,
-location: String
+<script type="text/javascript">
+  $('#description').on('change', function() {
+    $('#hiddenPrimaryCrime').prop('value', $('#description option:selected').val());
+  });
+  $('#type').on('change', function() {
+    $('#hiddenSubcrime').prop('value', $('#type option:selected').val());
+  });
+  $('#startDate').on('change', function() {
+    $('#hiddenTimeStart').prop('value', $('#startDate').val());
+  });
+  $('#endDate').on('change', function() {
+    $('#hiddenTimeEnd').prop('value', $('#endDate').val());
+  });
+  grabProperty('description','hiddenPrimaryCrime','description option:selected');
+  grabProperty('type','hiddenSubcrime','type option:selected');
+  grabProperty('startDate','hiddenTimeStart','startDate');
+  grabProperty('endDate','hiddenTimeEnd','endDate');
+
+  function grabProperty(idToWatch, idToGet, idToGive) {
+    $('#'+idToWatch).on('change', function() {
+      $('#'+idToGet).prop('value', $('#'+idToGive).val());
+    });
+  };
+</script>
